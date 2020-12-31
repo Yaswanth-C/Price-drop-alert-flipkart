@@ -1,0 +1,57 @@
+h2{
+    color: brown;
+}
+*{
+    font-family: 'FZShuTi';
+}
+
+
+section{
+    padding-top: 4.5em;
+}
+/* nav bar style */
+
+#collapser{
+    outline: none;
+    border: 1px solid whitesmoke;
+}
+.bg-custom{
+    background-image: linear-gradient(to top right,rgb(46, 128, 153),rgb(59, 116, 182), rgb(27, 93, 168));
+}
+#message-tag{
+    position: fixed;
+    right:20px;
+    top:50px;
+}
+
+.navbar-nav a{
+    text-decoration: none;
+}
+
+.nav-link-cs{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    color:whitesmoke;
+    border-bottom: 2px solid transparent;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    text-decoration: none;
+}
+.nav-active{
+    border-bottom: 2px solid whitesmoke;
+    background-image: linear-gradient(to top, rgba(238, 130, 238, 0.199),rgba(255, 255, 255, 0.199));
+}
+
+.nav-link-cs:hover{
+    color:rgb(230, 159, 230);
+    border-bottom: 2px solid rgb(201, 139, 241);
+}
+
+#nav-nav{
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+    box-shadow: 0px 1px 12px 5px rgb(175, 175, 175);
+    
+}
+

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add a product to watchlist{% endblock %}
+{% block static-files %}
+<link rel="stylesheet" href=" {% static 'linkadd/css/style-wl.css' %} ">
+{% endblock %}
+
+{%block add-wl-ul%}nav-active{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+    <span class="breadcrumb-item active"><strong>Add to watchlist</strong></span>
+</nav>
+
+<div class="container">
+    <form action="" method="POST" id="url_form">
+        <div class="row">
+            <div class="col-md-2">{% csrf_token %}</div>
+            <div class="col-md-8">
+                <div class="form-group">
+                <label for="url">Link:</label>
+                <input type="url" class="form-control" name="url" id="url" aria-describedby="helpId" placeholder="paste link here" required>
+                <small id="helpId" class="form-text text-muted"></small><br>
+                <button type="submit" class="btn btn-sm btn-primary btns">Submit</button>
+                <button type="reset" class="btn btn-sm btn-secondary btns" id="reset-btn">Reset</button>
+                
+                </div>
+            </div>
+            <div class="col-md-2">
+                
+            </div>
+            
+        </div>
+    </form>
+    <div class="row">
+        <div class="col">
+            <div class="progress" id="loading" style="display: none;">
+                Loading wait...
+            </div>
+        </div>
+    </div>
+    <div class="row" id="ajax-response">
+        <div class="col-0 col-md-3"></div>
+        <div class="col-12 col-md-6" id="ajax-res-success" style="display: none;">
+            <div class="card card-custom">
+                <div class="half-l">
+                    <img src="" class="center" alt="" id="product_img" height="200px">
+                </div>
+                <div class="half-r pl-sm-2 pl-md-3 px-lg-0">
+                    <div class="product-name"></div>
+                    <div class="" id="product-availability"></div>
+                    <div class="product-price"></div>
+                    <div class="product-activity-btn">
+                        <div id="item-exists">
+                            <div class="alert alert-info" style="width: 80%;">
+                                <strong>This product already exists in your watchlist</strong>
+                            </div>
+                        </div>
+                        <a href="{% url 'watchlist:save_to_list' %}" class="btn btn-sm btn-success" id="add_to_wl">Add To watchlist</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-0 col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8" id="ajax-res-error" style="display: none;">
+            <div class="error-ajax alert alert-danger"></div>
+        </div>
+        <div class="col-2"></div>
+
+    </div>
+</div>
+
+<script src="{% static 'linkadd/js/script.js' %}"></script>
+
+{% endblock %}

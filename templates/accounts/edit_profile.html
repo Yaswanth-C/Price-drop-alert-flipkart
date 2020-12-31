@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Edit profile
+{% endblock %}
+
+{%block ed-pr-ul%}nav-active{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+    <span class="breadcrumb-item active"><strong>Edit profile</strong></span>
+</nav>
+{% load crispy_forms_tags %}
+<div class="container">
+
+    <h2>Edit profile</h2>
+    <form action="" method="POST">
+    {% csrf_token %}
+
+    {{ form | crispy }}
+    <input type="submit" class="btn btn-block btn-sm col-sm-12 col-md-2 btn-success" value="Update">
+
+    </form>
+
+
+</div>
+<br>
+
+
+{%  endblock%}

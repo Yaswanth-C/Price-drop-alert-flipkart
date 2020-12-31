@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Sign up
+{% endblock %}
+
+
+{%block reg-ul%}nav-active{% endblock %}
+
+
+{% block content %}
+<nav class="breadcrumb">
+    <span class="breadcrumb-item active"><strong>Sign up</strong></span>
+</nav>
+{% load crispy_forms_tags %}
+<div class="container">
+
+    <h2>Sign up</h2>
+    <form action="" method="POST">
+    {% csrf_token %}
+
+    {{ form | crispy }}
+    <input type="submit" value="Sign up">
+
+    </form>
+
+
+</div>
+
+
+{%  endblock%}
