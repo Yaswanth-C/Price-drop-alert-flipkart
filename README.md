@@ -1,6 +1,13 @@
 # Price-drop-alert
-This is a simple price drop alert system made with django.    
-_Users may enter a product url copied from flipkart._
+This is a simple price drop alert system made with Django.    
+
+## Working
+
+- User first register
+- Then login
+- _User may enter a product URL copied from flipkart._
+- All URLs in the watchlist are scraped every time the scheduler runs.
+- User will get an email when the product experiences a price drop 
 
 ## Dependencies
 Install dependencies beforehand. 
@@ -15,7 +22,7 @@ pip install requests
 ```
 
 # Quick setup before running
-### 1) Add a `.env` file in pricedrop/ folder with following contents
+### 1) Add a `.env` file in 'pricedrop' folder with following contents
 ```
 EMAIL_HOST_USER = "replace your email id here"
 EMAIL_HOST_PASSWORD = "your password"
@@ -23,9 +30,9 @@ EMAIL_HOST_PASSWORD = "your password"
 _also enable less secure app access in google account_
 
 ### 2) Create a MySQL data base named 'django_pricedrop_db'
-The database used is MySQL due to limitations in sqlite.    
+The database used is MySQL due to limitations in SQLite.    
 
-### 3) Comment the ready() method in linkadd/apps.py
+### 3) Comment the ready() method in 'linkadd/apps.py'
 This is to prevent "Table 'django_pricedrop_db.django_apscheduler_djangojob' doesn't exist"  error
 ```
     # def ready(self):
@@ -40,7 +47,7 @@ then
 ```
 python manage.py migrate
 ```
-### 5) Final step , Uncomment the ready() method linkadd/apps.py
+### 5) Final step , Uncomment the ready() method in 'linkadd/apps.py'
 as below
 This is to start the periodic scheduler
 ```
@@ -54,4 +61,10 @@ For running use
 ```
 python manage.py runserver --noreload
 ```
- **use --noreload otherwise scheduler will run twice**
+ **use   --noreload otherwise scheduler will run twice**
+
+# Disclaimer
+
+Web scraping and crawling aren't illegal, but scraping a website without the owners permission is not legal.
+
+**Use it only for educational** purpose and **don't overwhelm the servers** by sending mass requests.

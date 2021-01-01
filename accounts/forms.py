@@ -12,7 +12,9 @@ class RegisterForm(UserCreationForm):
     def clean(self):
         super().clean()
         email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
+        if email == '':
+            raise ValidationError("You should enter an email id",code="invalid")
+        elif User.objects.filter(email=email).exists():
             raise ValidationError("Email id already exists",code="invalid")
         return self.cleaned_data
 

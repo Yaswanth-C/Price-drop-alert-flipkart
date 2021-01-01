@@ -21,7 +21,7 @@ section{
 #message-tag{
     position: fixed;
     right:20px;
-    top:50px;
+    bottom:50px;
 }
 
 .navbar-nav a{

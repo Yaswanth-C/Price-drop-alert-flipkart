@@ -34,6 +34,7 @@ def login_view(request):
             messages.success(request, 'Login successful')
             return redirect(request.session['next'])
         else:
+            messages.error(request, 'No such user exists')
             return render(request, "accounts/login.html")
     else:
         request.session['next'] = request.GET.get('next','/')

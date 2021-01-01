@@ -6,7 +6,7 @@ from django_apscheduler.models import DjangoJobExecution
 from django.conf import settings
 from django.core.mail import send_mail
 
-import sys,datetime
+import sys,datetime,time
 from tzlocal import get_localzone
 import requests
 
@@ -27,6 +27,7 @@ def database_crawler():
         user_data = User.objects.get(id=product.user_id)
         page = requests.get(url=product.product_url)
         # gathering data from server 
+        time.sleep(20)   # a twenty second delay before each request so we dont overwhelm the server.
         product_data_from_server = get_product_info(page_=page,url_=product.product_url)   # 'product_data_from_server'  will contain a dictionary
         # print(product.price)
         # print(' from server ')
@@ -40,7 +41,7 @@ def database_crawler():
         p.price = new_price
         p.price_th = new_price_th
         p.availability = new_availability
-        p.save()
+        p.save()    # update the newly gathered data to the database.
         print('save to DB ok')
 
         avilable_bool = new_availability == 'In stock'
@@ -144,9 +145,8 @@ def start():
     print(tz)
     scheduler = BackgroundScheduler({'apscheduler.timezone':tz})
     scheduler.add_jobstore(DjangoJobStore(), "default")
-    # run this job every .....
-    scheduler.add_job(database_crawler, 'interval', minutes=1, name='DB crawling and mailer', jobstore='default')
-    #scheduler.add_job(mailer, 'interval', minutes=1, name='Email to user', jobstore='default')
+    # run this job every 8 hours .....
+    scheduler.add_job(database_crawler, 'interval', hours=8, name='DB crawling and mailer', jobstore='default')
 
     register_events(scheduler)
     scheduler.start()
