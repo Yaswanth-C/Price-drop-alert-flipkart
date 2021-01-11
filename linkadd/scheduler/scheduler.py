@@ -37,7 +37,7 @@ def database_crawler():
         new_price_th = product_data_from_server.get('price_th')
         new_availability = product_data_from_server.get('availability')
 
-        p = Watchlist.objects.get(id = product.id)
+        p= products_obj.get(id=product.id)
         p.price = new_price
         p.price_th = new_price_th
         p.availability = new_availability
