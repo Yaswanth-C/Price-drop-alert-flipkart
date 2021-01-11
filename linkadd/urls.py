@@ -25,5 +25,6 @@ urlpatterns = [
     path('view/',views.view_watch_list,name="view_watchlist"),
     path('save/',views.save_last_search,name='save_to_list'),
     path('delete/<int:id>/',views.delete_watchlist_item,name='delete_item'),
+    path('view_history/<int:id>/',views.view_prod_history,name='view_history'),
 
 ]

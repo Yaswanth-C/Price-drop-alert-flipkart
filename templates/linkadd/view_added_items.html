@@ -30,6 +30,7 @@
                 <div>Date added : {{ product.date_added | date:"D d M Y f A"  }}</div>
                 <div class="product-activity-btn">
                     <a href="{{ product.product_url }}" target="_blank" class="btn btn-sm btn-info">Visit page</a>&nbsp;&nbsp;
+                    <a href="{% url 'watchlist:view_history' product.id %}" class="btn btn-sm btn-info">History</a>&nbsp;&nbsp;
                     <a href="{% url 'watchlist:delete_item' product.id %}" class="btn btn-sm btn-danger text-light">Remove</a>
                 </div>
             </div>

@@ -29,3 +29,4 @@ class MailingList(models.Model):
     is_price_drop = models.BooleanField(default=0)
     is_avail = models.BooleanField(default=0)
     status = models.CharField(max_length=20,default="pending")
+    date_added = models.DateTimeField(auto_now_add=True)

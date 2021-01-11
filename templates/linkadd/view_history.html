@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Product-History{% endblock %}
+{%block wl-ul%}nav-active{% endblock %}
+
+{% block content %}
+
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+    <a class="breadcrumb-item" href="{% url 'watchlist:view_watchlist' %}">Watchlist</a>
+    <span class="breadcrumb-item active"><strong>History</strong></span>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-0 col-md-2"></div>
+        <div class="col-12 col-md-8">
+            <h3>Crawling History</h3>
+            <span>View crawling event history of your product.</span>
+        </div>
+        <div class="col-0 col-md-2"></div>
+        <div class="col-12 col-md-12">&nbsp;</div>
+
+
+        <div class="col-0 col-md-2"></div>
+        <div class="col-12 col-md-8">
+            <div class="card">
+                <table>
+                    <tr>
+                        <td width="70px"><span class="badge badge-success" style="padding: 5px;margin-left: 10px;">{{ product.date_added }}</span></td>
+                        <td>
+                            <div style="margin-left: 10px;">
+                            {{ product.product_name }} .<br><span class="text-muted" style="font-size: 0.8em;">Product is added to watchlist.</span>
+                            </div>
+                        </td>
+                    </tr>
+                    </table>
+                </div>
+
+        </div>
+        <div class="col-0 col-md-2"></div>
+
+            {% for i in history %}
+            <div class="col-12">&nbsp;</div>
+            <div class="col-0 col-md-2"></div>
+            <div class="col-12 col-md-8">
+            <div class="card">
+                <table>
+                    <tr>
+                        <td width="70px">
+                    <span class="badge badge-success" style="padding: 5px;margin-left: 10px;">{{i.date_added}}</span>
+                        </td>
+                        <td><div style="margin-left: 10px;">
+                            {{product.product_name}} <br>
+                            <span class="text-muted" style="font-size: 0.8em;">
+                            {% if i.is_price_drop_and_avail %}
+                                Product was back in stock with pricedrop.
+                            {% elif i.is_price_drop and i.status == 'sent' %}
+                                Product had a pricedrop.- price then : &#8377;{{i.price_th}}
+                            {% elif i.is_avail and i.status == 'sent' %}
+                                Product was back in stock.
+                            {% endif %}
+                            <br>
+                            {% if i.status == 'sent' %}
+                                mail sent to your registered mail
+                            {% else %}
+                                mail yet to be sent.
+                            {% endif %}
+                            </span>
+                            <br>
+                            </div>
+                        </td>
+                    </tr>
+                </table>                    
+            </div>
+        </div>
+        <div class="col-0 col-md-2"></div>
+            {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

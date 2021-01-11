@@ -93,7 +93,12 @@ def delete_watchlist_item(request,id):
         product = Watchlist.objects.get(id=id)
         product.delete()
     return redirect('watchlist:view_watchlist')
-        
+
+def view_prod_history(request,id):
+    # read db
+    obj = MailingList.objects.filter(user=request.user,product_id=id)
+    product_details = Watchlist.objects.get(id=id)
+    return render(request,"linkadd/view_history.html",{'history':obj,'product':product_details})        
     
 
 
