@@ -5,6 +5,8 @@ from django_apscheduler.models import DjangoJobExecution
 
 from django.conf import settings
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 import sys,datetime,time
 from tzlocal import get_localzone
@@ -12,6 +14,8 @@ import requests
 
 from linkadd.models import MailingList, Watchlist,User
 from ..functions import get_product_info
+
+import random
 
 
 
@@ -25,9 +29,8 @@ def database_crawler():
     products_obj = Watchlist.objects.all()
     for product in products_obj:
         user_data = User.objects.get(id=product.user_id)
-        page = requests.get(url=product.product_url)
-        # gathering data from server 
-        time.sleep(20)   # a twenty second delay before each request so we dont overwhelm the server.
+        page = requests.get(url=product.product_url)    # gathering data from server 
+        time.sleep(random.randint(10,24))   # a random delay before each request so we dont overwhelm the server.
         product_data_from_server = get_product_info(page_=page,url_=product.product_url)   # 'product_data_from_server'  will contain a dictionary
         # print(product.price)
         # print(' from server ')
@@ -90,47 +93,40 @@ def mailer():
         message = ''
         email_from = settings.EMAIL_HOST_USER
         email_to = [user_obj.email,]
+        mail_message_dict={
+                            'subject':'',
+                            'username':user_obj.username,
+                            'msg1':'',
+                            'prod_name':product_obj.product_name,
+                            'price_new':str(mail.price_th),
+                            'lastcheck':datetime.datetime.now(),
+                            'prod_url':product_obj.product_url,
+                          }
 
         if mail.is_price_drop_and_avail:
-                subject = product_obj.product_name+' is back in stock'
-                message =f'''Hai {user_obj.username},
-                An item in your watchlist is now available with a pricedrop,
-                check it now...
-                Item name :{product_obj.product_name}
-                Price Today :{str(mail.price)}(last check on {str(datetime.datetime.now())})
-                product link :{product_obj.product_url}
-
-                from pricedrop team :-)
-                '''
-                send_mail(subject,message,email_from,email_to)
+            subject = product_obj.product_name+' is back in stock'
+            mail_message_dict['subject'] = subject
+            mail_message_dict['msg1'] = 'An item in your watchlist is now available with a pricedrop'
+            html_message = render_to_string("linkadd/email.html",mail_message_dict)
+            message =strip_tags(html_message)
+            send_mail(subject,message,email_from,email_to,html_message=html_message)
 
         elif mail.is_avail:
             #send mail about product availability
             subject = product_obj.product_name+' is back in stock'
-            message =f'''Hai {user_obj.username},
-                An item in your watchlist is back in stock,
-                check it now...
-                Item name :{product_obj.product_name}
-                Price Today :{str(mail.price)}(last check on {str(datetime.datetime.now())})
-                product link :{product_obj.product_url}
-
-                from pricedrop team :-)
-                '''
-            send_mail(subject,message,email_from,email_to)
+            mail_message_dict['subject'] = subject
+            mail_message_dict['msg1'] = 'An item in your watchlist is back in stock'
+            html_message = render_to_string("linkadd/email.html",mail_message_dict)
+            message =strip_tags(html_message)
+            send_mail(subject,message,email_from,email_to,html_message=html_message)
 
         elif mail.is_price_drop:
             subject = '[Price Drop]-'+product_obj.product_name+'. Is now at '+str(mail.price_th)
-
-            message =f'''Hai {user_obj.username},
-                An item in your watchlist is at a lowest price,
-                check it now...
-                Item name :{product_obj.product_name}
-                Price Today :{str(mail.price_th)}(last check on {str(datetime.datetime.now())})
-                product link :{product_obj.product_url}
-
-                from pricedrop team :-)
-                '''
-            send_mail(subject,message,email_from,email_to)
+            mail_message_dict['subject'] = subject
+            mail_message_dict['msg1'] = 'An item in your watchlist is at a lowest price'
+            html_message = render_to_string("linkadd/email.html",mail_message_dict)
+            message =strip_tags(html_message)
+            send_mail(subject,message,email_from,email_to,html_message=html_message)
             
         else:
             pass
@@ -145,8 +141,8 @@ def start():
     print(tz)
     scheduler = BackgroundScheduler({'apscheduler.timezone':tz})
     scheduler.add_jobstore(DjangoJobStore(), "default")
-    # run this job every 8 hours .....
-    scheduler.add_job(database_crawler, 'interval', hours=8, name='DB crawling and mailer', jobstore='default')
+    # run this job every 5 hours .....  change the hours=5  to  minutes=5 to run the scheduler every 5 minutes
+    scheduler.add_job(database_crawler, 'interval', hours=5, name='DB crawling and mailer', jobstore='default')
 
     register_events(scheduler)
     scheduler.start()
