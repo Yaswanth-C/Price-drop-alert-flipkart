@@ -26,10 +26,13 @@
             <div class="card">
                 <table>
                     <tr>
-                        <td width="70px"><span class="badge badge-success" style="padding: 5px;margin-left: 10px;">{{ product.date_added }}</span></td>
+                        <td width="70px">
+                            <span class="badge badge-success" style="padding: 5px;margin-left: 10px;">{{ product.date_added | date:"d M Y" }}</span>
+                            <span class="badge badge-info" style="padding: 5px;margin-left: 10px;">&#x1f551;{{ product.date_added | date:"f A" }}</span>
+                        </td>
                         <td>
                             <div style="margin-left: 10px;">
-                            {{ product.product_name }} .<br><span class="text-muted" style="font-size: 0.8em;">Product is added to watchlist.</span>
+                            {{ product.product_name }} .<br><span style="font-size: 0.8em;color:rgb(34, 127, 214);">Product is added to watchlist.</span>
                             </div>
                         </td>
                     </tr>
@@ -47,23 +50,24 @@
                 <table>
                     <tr>
                         <td width="70px">
-                    <span class="badge badge-success" style="padding: 5px;margin-left: 10px;">{{i.date_added}}</span>
+                            <span class="badge badge-success" style="padding: 5px;margin-left: 10px;">{{i.date_added | date:"d M Y"}}</span>
+                            <span class="badge badge-info" style="padding: 5px;margin-left: 10px;">&#x1f551;{{i.date_added | date:"f A"}}</span>
                         </td>
                         <td><div style="margin-left: 10px;">
                             {{product.product_name}} <br>
-                            <span class="text-muted" style="font-size: 0.8em;">
+                            <span style="font-size: 0.8em;color: rgb(34, 127, 214);">
                             {% if i.is_price_drop_and_avail %}
                                 Product was back in stock with pricedrop.
-                            {% elif i.is_price_drop and i.status == 'sent' %}
+                            {% elif i.is_price_drop %}
                                 Product had a pricedrop.- price then : &#8377;{{i.price_th}}
-                            {% elif i.is_avail and i.status == 'sent' %}
-                                Product was back in stock.
+                            {% elif i.is_avail %}
+                                Product was back in stock after a stock out.
                             {% endif %}
                             <br>
                             {% if i.status == 'sent' %}
-                                mail sent to your registered mail
+                               <span style="color: rgb(30, 187, 30);">Mail sent to your registered mail</span>
                             {% else %}
-                                mail yet to be sent.
+                                <span style="color: rgb(250, 76, 76);">Mail yet to be sent.</span>
                             {% endif %}
                             </span>
                             <br>
