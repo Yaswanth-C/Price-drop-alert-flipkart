@@ -3,11 +3,12 @@ This is a simple price drop alert system made with Django.
 
 ## Working
 
-- User first register
-- Then login
-- _User may enter a product URL copied from flipkart._
+- User needs to register first.
+- Then login with the registered credentials.
+- User may enter a product URL copied from flipkart ,then check the response and add it to the watchlist.
 - All URLs in the watchlist are scraped every time the scheduler runs.
-- User will get an email when the product experiences a price drop 
+- Changes to the price or availability of the product is then saved to the database.
+- User will get an email when the product experiences a price drop or whenever the product is back in stock.
 
 ## Dependencies
 Install dependencies beforehand. 
@@ -16,6 +17,9 @@ pip install django-apscheduler
 ```
 ```
 pip install beautifulsoup4
+```
+```
+pip install django-crispy-forms
 ```
 ```
 pip install requests
