@@ -21,7 +21,7 @@
     position: absolute; top: 2%;left: 10%;
 }
 .product-name{
-    font-size: 1.1em;font-weight: 600;
+    font-size: 1.1em;font-weight: 600;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;
 }
 .product-availability-instock{
     color: rgb(36, 170, 36);font-weight: 600;
