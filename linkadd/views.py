@@ -94,6 +94,7 @@ def delete_watchlist_item(request,id):
     finally:
         product = Watchlist.objects.get(id=id)
         product.delete()
+        messages.success(request,'Product removed')
     return redirect('watchlist:view_watchlist')
 
 

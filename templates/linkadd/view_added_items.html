@@ -31,12 +31,31 @@
                 <div class="product-activity-btn">
                     <a href="{{ product.product_url }}" target="_blank" class="btn btn-sm btn-info">Visit page</a>&nbsp;&nbsp;
                     <a href="{% url 'watchlist:view_history' product.id %}" class="btn btn-sm btn-info">History</a>&nbsp;&nbsp;
-                    <a href="{% url 'watchlist:delete_item' product.id %}" class="btn btn-sm btn-danger text-light">Remove</a>
+                    <a href="#" class="btn btn-sm btn-danger text-light"  data-toggle="modal" data-target="#modelId-{{product.id}}">Remove</a>
                 </div>
             </div>
       </div>
     </div>
-    
+        
+    <div class="modal fade" id="modelId-{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger"><strong>Sure to remove ?</strong></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure to delete <span style="color: blue;">{{product.product_name}}</span> from your watchlist ?
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-secondary" data-dismiss="modal">NO</a>
+                    <a href="{% url 'watchlist:delete_item' product.id %}" class="btn btn-danger">Ok Remove</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% empty %}
 <div class="col-12">&nbsp;</div>
 <div class="col-2">&nbsp;</div>
