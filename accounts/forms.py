@@ -27,3 +27,12 @@ class UserUpdateForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         del self.fields['password']
+
+    def clean(self):
+        super().clean()
+        email = self.cleaned_data.get('email')
+        if email == '':
+            raise ValidationError("You should enter an email id",code="invalid")
+        elif User.objects.filter(email=email).exclude(id=self.instance.id).exists():
+            raise ValidationError("Email id already exists",code="invalid")
+        return self.cleaned_data
