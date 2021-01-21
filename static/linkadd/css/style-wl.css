@@ -4,6 +4,7 @@
     margin: 5px; 
     display: flex;
     flex-direction: row;
+    box-shadow: 1px 1px 10px 0px rgb(192, 190, 190);
 }
 .half-l{
     width: 30%;

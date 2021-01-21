@@ -24,14 +24,14 @@
                 <img src="{{ product.product_pic_url }}" class="center" alt="{{ product.product_name }}" style="max-width: 100%;max-height: 100%;">
             </div>
             <div class="half-r ml-sm-2 pl-md-3 pl-lg-0">
-                <div class="product-name">{{ product.product_name }}</div>
+                <div class="product-name" style="padding-right: 15px;">{{ product.product_name }}</div>
                 <div class="{% if product.availability == 'Sold Out' %}product-availability-stock-out{% else %} product-availability-instock {% endif %}">{{ product.availability }}</div>
                 <div class="product-price">&#8377;{{ product.price_th }}</div>
-                <div>Date added : {{ product.date_added | date:"D d M Y f A"  }}</div>
+                <div>Added on: {{ product.date_added | date:"d M Y f A"  }}</div>
                 <div class="product-activity-btn">
                     <a href="{{ product.product_url }}" target="_blank" class="btn btn-sm btn-info">Visit page</a>&nbsp;&nbsp;
                     <a href="{% url 'watchlist:view_history' product.id %}" class="btn btn-sm btn-info">History</a>&nbsp;&nbsp;
-                    <a href="#" class="btn btn-sm btn-danger text-light"  data-toggle="modal" data-target="#modelId-{{product.id}}">Remove</a>
+                    <a href="#" class="btn btn-sm btn-outline-danger"  data-toggle="modal" data-target="#modelId-{{product.id}}">&#10008;</a>
                 </div>
             </div>
       </div>
