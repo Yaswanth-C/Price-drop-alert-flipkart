@@ -3,7 +3,7 @@ This is a simple price drop alert system made with Django.
 
 ## Working
 
-- User needs to register first.
+- User needs to register first, with an email id of their choice .
 - Then login with the registered credentials.
 - User may enter a product URL copied from flipkart ,then check the response and add it to the watchlist.
 - All URLs in the watchlist are scraped every time the scheduler runs.
@@ -13,31 +13,23 @@ This is a simple price drop alert system made with Django.
 ## Dependencies
 Install dependencies beforehand. 
 ```
-pip install django-apscheduler
+pip install -r requirements.txt
 ```
-```
-pip install beautifulsoup4
-```
-```
-pip install django-crispy-forms
-```
-```
-pip install requests
-```
-
 # Quick setup before running
 ### 1) Add a `.env` file in 'pricedrop' folder with following contents
 ```
-EMAIL_HOST_USER = "replace your email id here"
-EMAIL_HOST_PASSWORD = "your password"
+EMAIL_HOST_USER = "replace this with the email-id( Gmail id ) you are going to use."
+EMAIL_HOST_PASSWORD = "the google account password"
 ```
-_also enable less secure app access in google account_
+<mark>**_Note:_** This Email-id and password(must be a Gmail one) is for the system to mail the alerts to the users. The registering users must enter their email-id on the sign-up page.</mark>
+
+_Also enable <mark>less secure app access</mark> in google account_
 
 ### 2) Create a MySQL data base named 'django_pricedrop_db'
 The database used is MySQL due to limitations in SQLite.    
 
 ### 3) Comment the ready() method in 'linkadd/apps.py'
-This is to prevent "Table 'django_pricedrop_db.django_apscheduler_djangojob' doesn't exist"  error
+This is to prevent "Table 'django_pricedrop_db.django_apscheduler_djangojob' doesn't exist"  error when migrating the database.
 ```
     # def ready(self):
     #         from .scheduler import scheduler
