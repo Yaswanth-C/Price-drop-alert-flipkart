@@ -29,8 +29,8 @@ def database_crawler():
     products_obj = Watchlist.objects.all()
     for product in products_obj:
         user_data = User.objects.get(id=product.user_id)
-        page = requests.get(url=product.product_url)    # gathering data from server 
         time.sleep(random.randint(10,24))   # a random delay before each request so we dont overwhelm the server.
+        page = requests.get(url=product.product_url)    # gathering data from server 
         product_data_from_server = get_product_info(page_=page,url_=product.product_url)   # 'product_data_from_server'  will contain a dictionary
         # print(product.price)
         # print(' from server ')
