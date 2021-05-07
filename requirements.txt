@@ -3,3 +3,5 @@ beautifulsoup4==4.9.1
 django-apscheduler==0.5.1
 django-crispy-forms==1.10.0
 requests==2.24.0
+python-dotenv==0.17.1
+mysqlclient==2.0.3
