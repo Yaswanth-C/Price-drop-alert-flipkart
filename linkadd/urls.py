@@ -31,17 +31,17 @@ urlpatterns = [
         name="add_link_ajax",
     ),
     path(
-        roure='view/',
+        route='view/',
         view=views.view_watch_list,
         name="view_watchlist",
     ),
     path(
-        roure='save/',
+        route='save/',
         view=views.save_last_search,
         name='save_to_list',
     ),
     path(
-        roure='delete/<int:id>/',
+        route='delete/<int:id>/',
         view=views.delete_watchlist_item,
         name='delete_item',
     ),
