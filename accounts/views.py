@@ -17,11 +17,9 @@ def register(request):
             form.save()
             messages.success(request, 'Registration successfull')
             return redirect('login')
-        else:
-            return render(request, "accounts/register.html",{'form':form})
-    else:
-        form = RegisterForm()
         return render(request, "accounts/register.html",{'form':form})
+    form = RegisterForm()
+    return render(request, "accounts/register.html",{'form':form})
 
 
 def login_view(request):
@@ -33,12 +31,10 @@ def login_view(request):
             login(request,user)
             messages.success(request, 'Login successful')
             return redirect(request.session['next'])
-        else:
-            messages.error(request, 'No such user exists')
-            return render(request, "accounts/login.html")
-    else:
-        request.session['next'] = request.GET.get('next','/')
+        messages.error(request, 'No such user exists')
         return render(request, "accounts/login.html")
+    request.session['next'] = request.GET.get('next','/')
+    return render(request, "accounts/login.html")
 
 
 def logout_view(request):
@@ -60,8 +56,6 @@ def edit_profile(request):
             form.save()
             messages.success(request,'Profile updated successfully')
             return redirect(request.path)
-        else:
-            return render(request,"accounts/edit_profile.html",{'form':form})
-    else:
-        form = UserUpdateForm(instance = request.user)
-        return render(request, "accounts/edit_profile.html",{'form':form})
+        return render(request,"accounts/edit_profile.html",{'form':form})
+    form = UserUpdateForm(instance = request.user)
+    return render(request, "accounts/edit_profile.html",{'form':form})

@@ -7,5 +7,5 @@ class LinkaddConfig(AppConfig):
     #comment ready method to skip scheduler
 
     def ready(self):
-            from .scheduler import scheduler
-            scheduler.start()
+        from .scheduler import scheduler
+        scheduler.start()

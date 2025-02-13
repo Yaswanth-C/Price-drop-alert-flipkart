@@ -20,11 +20,34 @@ from . import views
 app_name="linkadd"
 
 urlpatterns = [
-    path('add/',views.link_add_view,name="add_link_to_wl"),
-    path('add/add_link',views.link_add_ajax,name="add_link_ajax"),
-    path('view/',views.view_watch_list,name="view_watchlist"),
-    path('save/',views.save_last_search,name='save_to_list'),
-    path('delete/<int:id>/',views.delete_watchlist_item,name='delete_item'),
-    path('view_history/<int:id>/',views.view_prod_history,name='view_history'),
-
+    path(
+        route='add/',
+        view=views.link_add_view,
+        name="add_link_to_wl",
+    ),
+    path(
+        route='add/add_link',
+        view=views.link_add_ajax,
+        name="add_link_ajax",
+    ),
+    path(
+        roure='view/',
+        view=views.view_watch_list,
+        name="view_watchlist",
+    ),
+    path(
+        roure='save/',
+        view=views.save_last_search,
+        name='save_to_list',
+    ),
+    path(
+        roure='delete/<int:id>/',
+        view=views.delete_watchlist_item,
+        name='delete_item',
+    ),
+    path(
+        route='view_history/<int:id>/',
+        view=views.view_prod_history,
+        name='view_history',
+    ),
 ]
