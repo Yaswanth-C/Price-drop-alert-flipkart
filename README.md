@@ -28,28 +28,9 @@ _Also enable <mark>less secure app access</mark> in google account_
 ### 2) Create a MySQL data base named 'django_pricedrop_db'
 The database used is MySQL due to limitations in SQLite.    
 
-### 3) Comment the ready() method in 'linkadd/apps.py'
-This is to prevent "Table 'django_pricedrop_db.django_apscheduler_djangojob' doesn't exist"  error when migrating the database.
-```
-    # def ready(self):
-    #         from .scheduler import scheduler
-    #         scheduler.start()
-```
-### 4) Migrate the database
-```
-python manage.py makemigrations
-```
-then
+### 3) Migrate the database
 ```
 python manage.py migrate
-```
-### 5) Final step , Uncomment the ready() method in 'linkadd/apps.py'
-as below
-This is to start the periodic scheduler
-```
-    def ready(self):
-            from .scheduler import scheduler
-            scheduler.start()
 ```
 
 ## Running
