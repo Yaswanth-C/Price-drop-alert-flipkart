@@ -1,6 +1,8 @@
 # Price-drop-alert
 This is a simple price drop alert system made with Django.    
 
+<img src="Screenshot.png" alt="Screenshot" width="500"/>
+
 ## Working
 
 - User needs to register first, with an email id of their choice .
