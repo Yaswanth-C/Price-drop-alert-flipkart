@@ -8,6 +8,6 @@ class LinkaddConfig(AppConfig):
     #comment ready method to skip scheduler
 
     def ready(self):
-        if not any(arg in sys.argv for arg in ["migrate", "makemigrations"]):
+        if "runserver" in sys.argv:
             from .scheduler import scheduler
             scheduler.start()
