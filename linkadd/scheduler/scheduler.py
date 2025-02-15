@@ -8,6 +8,7 @@ import requests
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from django_apscheduler.jobstores import DjangoJobStore, register_events
+from django_apscheduler.models import DjangoJob
 
 from django.conf import settings
 from django.core.mail import send_mail
@@ -178,7 +179,7 @@ def start():
     scheduler = BackgroundScheduler({"apscheduler.timezone": tz})
     scheduler.add_jobstore(DjangoJobStore(), "default")
     # remove all jobs from the scheduler, when starting up.
-    scheduler.remove_all_jobs()
+    DjangoJob.objects.all().delete()
     # run this job every 5 hours .....  change the hours=5  to  minutes=5 to run the scheduler every 5 minutes
     scheduler.add_job(
         database_crawler,
