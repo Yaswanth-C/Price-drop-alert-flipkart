@@ -1,6 +1,6 @@
 /* product styles */
 .card-custom{
-    height: 210px;
+    height: 230px;
     margin: 5px; 
     display: flex;
     flex-direction: row;
@@ -22,17 +22,33 @@
     position: absolute; top: 2%;left: 10%;
 }
 .product-name{
-    font-size: 1.1em;font-weight: 600;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;
+    font-size: 1.1em;
+    font-weight: 600;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient:vertical;
+    overflow: hidden;
+    margin: 10px;
 }
 .product-availability-instock{
     color: rgb(36, 170, 36);font-weight: 600;
+    margin: 10px;
 }
 .product-availability-stock-out{
     color: rgb(235, 38, 31);font-weight: 600;
+    margin: 10px;
 }
 .product-price{
     color: rgb(38, 32, 58);font-weight: 600;
+    margin: 10px;
 }
 .product-activity-btn{
     position: absolute; bottom: 3%; right: 10%;
+}
+.added-on{
+    font-size: x-small;
+    position: relative;
+    top: -30px;
+    left: 20px;
 }

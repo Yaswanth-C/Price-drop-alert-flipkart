@@ -18,16 +18,15 @@
     <div class="row">
 {% for product in data %}
 
-    <div class="col-12 col-md-8 col-lg-6">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-4">
       <div class="card card-custom">
             <div class="half-l">
-                <img src="{{ product.product_pic_url }}" class="center" alt="{{ product.product_name }}" style="max-width: 100%;max-height: 100%;">
+                <img src="{{ product.product_pic_url }}" class="center" alt="{{ product.product_name }}" style="max-width: 100%;max-height: 100%;padding-top: 10px;">
             </div>
             <div class="half-r ml-sm-2 pl-md-3 pl-lg-0">
                 <div class="product-name" style="padding-right: 15px;">{{ product.product_name }}</div>
                 <div class="{% if product.availability == 'Sold Out' %}product-availability-stock-out{% else %} product-availability-instock {% endif %}">{{ product.availability }}</div>
                 <div class="product-price">&#8377;{{ product.price_th }}</div>
-                <div>Added on: {{ product.date_added | date:"d M Y f A"  }}</div>
                 <div class="product-activity-btn">
                     <a href="{{ product.product_url }}" target="_blank" class="btn btn-sm btn-info">Visit page</a>&nbsp;&nbsp;
                     <a href="{% url 'watchlist:view_history' product.id %}" class="btn btn-sm btn-info">History</a>&nbsp;&nbsp;
@@ -35,6 +34,7 @@
                 </div>
             </div>
       </div>
+      <div class="added-on">Added on: {{ product.date_added | date:"d M Y f A"  }}</div>
     </div>
         
     <div class="modal fade" id="modelId-{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
