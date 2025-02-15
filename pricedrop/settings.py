@@ -22,6 +22,9 @@ load_dotenv()     # to load email credentials from the .env file
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
+DATABASE_USER = os.getenv("DATABASE_USER")
+DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +54,7 @@ INSTALLED_APPS = [
     'accounts',
     'linkadd',
     'crispy_forms',
+    'crispy_bootstrap4',
     'django_apscheduler',
 ]
 
@@ -97,8 +101,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_pricedrop_db',
-        'USER': 'root',
-        'PASSWORD':'',
+        'USER': DATABASE_USER,
+        'PASSWORD':DATABASE_PASSWORD,
         'HOST':'localhost',
         'PORT':'3306',
     }
@@ -152,3 +156,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
