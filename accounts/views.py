@@ -1,4 +1,3 @@
-from django.conf.urls import url
 from django.shortcuts import render
 from django.shortcuts import redirect,render
 from django.contrib.auth import login,logout,authenticate
@@ -33,7 +32,7 @@ def login_view(request):
             return redirect(request.session['next'])
         messages.error(request, 'No such user exists')
         return render(request, "accounts/login.html")
-    request.session['next'] = request.GET.get('next','/')
+    request.session['next'] = request.GET.get('next','/watchlist/view/')
     return render(request, "accounts/login.html")
 
 
