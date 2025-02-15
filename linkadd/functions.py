@@ -7,7 +7,10 @@ from django.db.models import Q
 from .models import Watchlist
 
 
-def get_product_info(page_, url_, user=""):
+def get_product_info(page_, url_, user="", for_crawling=False, product_id=None):
+    if for_crawling:
+        print(f"gathering data for {product_id}")
+
     url = url_
     page = page_
 
@@ -26,7 +29,7 @@ def get_product_info(page_, url_, user=""):
     except KeyError:
         pid = "none"
     exists = False
-    if pid != "none":
+    if pid != "none" or for_crawling:
         _query = Q(pid=pid)
         if user:
             _query &= Q(user=user)
@@ -64,5 +67,6 @@ def get_product_info(page_, url_, user=""):
         "price_th": price_th,
         "domain": domain,
         "product_pic_url": product_pic_url,
+        "product_id": product_id,
     }
     return data
