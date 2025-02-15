@@ -18,8 +18,6 @@ from linkadd.models import MailingList, Watchlist, User
 from ..functions import get_product_info
 
 
-
-
 def database_crawler():
     today = datetime.datetime.now()
     print(today)
