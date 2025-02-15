@@ -1,3 +1,4 @@
+import sys
 from django.apps import AppConfig
 
 
@@ -7,5 +8,6 @@ class LinkaddConfig(AppConfig):
     #comment ready method to skip scheduler
 
     def ready(self):
-        from .scheduler import scheduler
-        scheduler.start()
+        if not any(arg in sys.argv for arg in ["migrate", "makemigrations"]):
+            from .scheduler import scheduler
+            scheduler.start()
