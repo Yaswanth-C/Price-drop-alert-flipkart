@@ -11,7 +11,7 @@ class Watchlist(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     product_url=models.TextField()
     domain = models.CharField(max_length = 30,null=False)
-    product_name = models.CharField(max_length = 150,null=False)
+    product_name = models.TextField()
     price = models.PositiveIntegerField(null=False)
     price_th = models.CharField(max_length = 10,null=False)
     product_pic_url = models.TextField()
