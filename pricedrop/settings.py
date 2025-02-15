@@ -22,6 +22,9 @@ load_dotenv()     # to load email credentials from the .env file
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
+DATABASE_USER = os.getenv("DATABASE_USER")
+DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -97,8 +100,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_pricedrop_db',
-        'USER': 'root',
-        'PASSWORD':'',
+        'USER': DATABASE_USER,
+        'PASSWORD':DATABASE_PASSWORD,
         'HOST':'localhost',
         'PORT':'3306',
     }
